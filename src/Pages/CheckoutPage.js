@@ -4,7 +4,6 @@ import { Truck, Package } from 'lucide-react';
 const CheckoutPage = ({ onNavigate, cart, setCart }) => {
   const totalSteps = 2;
 
-  // 🔄 Load from localStorage on first render
   const savedData = JSON.parse(localStorage.getItem('checkoutData')) || {};
   const [currentStep, setCurrentStep] = useState(savedData.currentStep || 1);
   const [fullName, setFullName] = useState(savedData.fullName || '');
@@ -12,7 +11,6 @@ const CheckoutPage = ({ onNavigate, cart, setCart }) => {
   const [city, setCity] = useState(savedData.city || '');
   const [zip, setZip] = useState(savedData.zip || '');
 
-  // 🔁 Sync form data to localStorage whenever it changes
   useEffect(() => {
     const checkoutData = {
       currentStep,
@@ -28,18 +26,20 @@ const CheckoutPage = ({ onNavigate, cart, setCart }) => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
   };
 
-  const handleNext = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      const locationQuery = `${address}, ${city}, ${zip}`;
-      const mapsURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationQuery)}`;
+ const handleNext = () => {
+  if (currentStep < totalSteps) {
+    setCurrentStep(currentStep + 1);
+  } else {
+    const locationQuery = `${address}, ${city}, ${zip}`;
+    const mapsURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(locationQuery)}`;
 
-      const itemList = cart.map(
-        item => `- ${item.name} (${item.selectedSize}, ${item.selectedColor}) x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
-      ).join('\n');
+    const itemList = cart.map(
+      item => `- ${item.name} (${item.selectedSize}, ${item.selectedColor}) x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n');
 
-      const message = `
+    const total = calculateTotal();
+
+    const message = `
 📦 *New T-Shirt Order*
 👤 *Name:* ${fullName}
 🏠 *Address:* ${address}, ${city}, ${zip}
@@ -49,22 +49,48 @@ const CheckoutPage = ({ onNavigate, cart, setCart }) => {
 🛍️ *Items Ordered:*
 ${itemList}
 
-💰 *Total:* $${calculateTotal()}
-      `.trim();
+💰 *Total:* $${total}
+    `.trim();
 
-      const encodedMessage = encodeURIComponent(message);
-      const phone = "919573188570";
-      const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
+    // ✅ Send to WhatsApp
+    const encodedMessage = encodeURIComponent(message);
+    const phone = "919573188570";
+    const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
 
-      window.open(whatsappURL, "_blank");
+    // ✅ Send to Google Sheets using URLSearchParams
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSdK05vwdeJa00g1dDmGqx3BeYdak4hE8xptDv0VPvv3BI06iQ/formResponse";
 
-      localStorage.removeItem('cart');
-      localStorage.removeItem('checkoutData'); // 🧹 Clear checkout info
+    const formBody = new URLSearchParams();
+    formBody.append("entry.586325709", fullName); // Full Name
+    formBody.append("entry.1460433407", `${address}, ${city}, ${zip}`); // Full Address
+    formBody.append("entry.1211019065", city); // City
+    formBody.append("entry.2106430468", zip); // Pincode
+    formBody.append("entry.60924215", itemList); // Items Ordered
+    formBody.append("entry.1532225463", total); // Total Price
 
-      setCart([]);
-      onNavigate('home');
+    console.log("🚀 Sending the following to Google Sheets:");
+    for (const [key, val] of formBody.entries()) {
+      console.log(`${key}: ${val}`);
     }
-  };
+
+    fetch(formURL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formBody.toString(),
+    }).then(() => console.log("✅ Order submitted to Google Sheets"));
+
+    // 🧹 Clean up
+    localStorage.removeItem("cart");
+    localStorage.removeItem("checkoutData");
+    setCart([]);
+    onNavigate("home");
+  }
+};
+
 
   const handleBack = () => {
     if (currentStep > 1) {
@@ -86,7 +112,7 @@ ${itemList}
     <div className="container mx-auto px-6 md:px-12 py-8 min-h-[calc(100vh-200px)]">
       <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Checkout</h1>
 
-      {/* Progress */}
+      {/* Progress Steps */}
       <div className="flex justify-between items-center mb-8 max-w-2xl mx-auto">
         <div className="flex flex-col items-center">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white ${currentStep >= 1 ? 'bg-indigo-600' : 'bg-gray-300'}`}>

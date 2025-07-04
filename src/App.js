@@ -104,7 +104,7 @@ const App = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="text-3xl font-extrabold text-indigo-700 cursor-pointer" onClick={() => navigateTo('home')}>
-            <img src={Logo} height={70} width={70} className='rounded-full shadow object-cover'/>
+            <img src={Logo} height={50} width={50} className='rounded-full shadow object-cover'/>
             
           </div>
 
@@ -118,12 +118,12 @@ const App = () => {
 
           {/* Icons: Search, User, Cart */}
           <div className="flex items-center space-x-6">
-            <button className="text-gray-700 hover:text-indigo-600 hidden md:block">
+            {/* <button className="text-gray-700 hover:text-indigo-600 hidden md:block">
               <Search size={24} />
             </button>
             <button className="text-gray-700 hover:text-indigo-600 hidden md:block">
               <User size={24} />
-            </button>
+            </button> */}
             <button onClick={() => navigateTo('cart')} className="text-gray-700 hover:text-indigo-600 relative">
               <ShoppingCart size={24} />
               {cart.length > 0 && (
@@ -230,22 +230,5 @@ const App = () => {
   );
 };
 
-// Simple ChevronDown icon for select elements
-const ChevronDown = ({ size = 24, className = '' }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={`lucide lucide-chevron-down ${className}`}
-  >
-    <path d="m6 9 6 6 6-6" />
-  </svg>
-);
 
 export default App;

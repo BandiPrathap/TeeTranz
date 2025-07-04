@@ -22,18 +22,18 @@ const ProductCard = ({ product, onProductClick }) => (
         <Heart size={20} />
       </button>
     </div>
-    <div className="p-5 flex flex-col flex-grow">
-      <h3 className="text-lg font-semibold text-gray-800 mb-1">{product.name}</h3>
-      <p className="text-gray-500 text-sm mb-2 capitalize">{product.category} T-Shirt</p>
-      <div className="flex items-center mb-3">
+    <div className="p-2 flex flex-col flex-grow">
+      <h3 className="text-sm font-semibold text-gray-800 mb-1">{product.name}</h3>
+      {/* <p className="text-gray-500 text-sm mb-2 capitalize">{product.category} T-Shirt</p> */}
+      <div className="flex items-center mb-2">
         <StarRating rating={product.rating} />
         {/* {product.numReviews > 0 && <span className="text-sm text-gray-600 ml-2">({product.numReviews})</span>} */}
       </div>
-      <div className="flex items-center justify-between mt-auto">
-        <span className="text-2xl font-bold text-indigo-700">${product.price.toFixed(2)}</span>
-        <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors duration-200 shadow-md">
+      <div className="flex items-center justify-between">
+        <span className="text-md font-bold text-indigo-700">${product.price.toFixed(2)}</span>
+        {/* <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-indigo-700 transition-colors duration-200 shadow-md">
           View More
-        </button>
+        </button> */}
       </div>
     </div>
   </div>

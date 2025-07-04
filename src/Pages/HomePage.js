@@ -85,7 +85,7 @@ const HomePage = ({ onNavigate, onProductClick }) => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
             ))}

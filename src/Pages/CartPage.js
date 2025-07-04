@@ -37,7 +37,7 @@ const CartPage = ({ cart, onNavigate, onUpdateQuantity, onRemoveFromCart }) => {
                   <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
                   <p className="text-sm text-gray-600">Size: {item.selectedSize} | Color: {item.selectedColor}</p>
                   <p className="text-md font-bold text-indigo-700 mb-2">${item.price.toFixed(2)}</p>
-                  <div className="flex items-center space-x-2 mr-4 product-quantity-lg">
+                  <div className="sm:flex items-center space-x-2 mr-4">
                     <button
                       onClick={() => onUpdateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity - 1)}
                       className="bg-gray-200 text-gray-700 p-2 rounded-full hover:bg-gray-300 transition-colors"
@@ -53,7 +53,7 @@ const CartPage = ({ cart, onNavigate, onUpdateQuantity, onRemoveFromCart }) => {
                     </button>
                   </div>
                 </div>
-                {/* <div className="flex items-center space-x-2 mr-4 product-quantity-lg">
+                {/* <div className="flex items-center space-x-2 mr-4">
                   <button
                     onClick={() => onUpdateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity - 1)}
                     className="bg-gray-200 text-gray-700 p-2 rounded-full hover:bg-gray-300 transition-colors"

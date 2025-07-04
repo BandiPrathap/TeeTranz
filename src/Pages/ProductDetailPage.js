@@ -101,29 +101,30 @@ const ProductDetailPage = ({ productId, onNavigate, onAddToCart, onProductClick 
 
         {/* Product Details */}
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">{product.name}</h1>
-          <p className="text-gray-600 text-lg mb-2 capitalize">{product.category} T-Shirt</p>
+          <h1 className="text-xl font-bold text-gray-900 mb-0">{product.name}</h1>
+          <p className="text-gray-600 text-lg mb-1 capitalize">{product.category} T-Shirt</p>
           <div className="flex items-center mb-4">
             <StarRating rating={product.rating} />
-            {product.numReviews > 0 ? (
+            {/* {product.numReviews > 0 ? (
               <span className="text-sm text-gray-600 ml-2">({product.numReviews} Reviews)</span>
             ) : (
               <span className="text-sm text-gray-600 ml-2">No Reviews Yet</span>
-            )}
+            )} */}
+            <p className="text-2xl font-extrabold text-indigo-700 mb-2">${product.price.toFixed(2)}</p>
           </div>
-          <p className="text-5xl font-extrabold text-indigo-700 mb-6">${product.price.toFixed(2)}</p>
+          
 
           <p className="text-gray-700 mb-6 leading-relaxed">{product.description}</p>
 
           {/* Size Selector */}
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-3">Select Size:</h3>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2">
               {product.sizes.map((size) => (
                 <button
                   key={size}
                   onClick={() => setSelectedSize(size)}
-                  className={`px-5 py-3 rounded-lg border-2 text-lg font-medium transition-all duration-200 ${selectedSize === size ? 'bg-indigo-600 text-white border-indigo-600 shadow-md' : 'bg-white text-gray-800 border-gray-300 hover:border-indigo-400'}`}
+                  className={`px-5 py-3 rounded-lg border-2 text-lg font-medium transition-all duration-200 ${selectedSize === size ? 'bg-indigo-600 text-white border-indigo-600 shadow-md' : 'bg-white text-gray-800 border-gray-300 hover:border-indigo-400'} h-30 w-30`}
                 >
                   {size}
                 </button>
@@ -191,8 +192,14 @@ const ProductDetailPage = ({ productId, onNavigate, onAddToCart, onProductClick 
 
           {/* Product Details & Reviews */}
           <div className="mt-10 border-t border-gray-200 pt-8">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">Product Details</h3>
-            <p className="text-gray-700 leading-relaxed mb-6">{product.details}</p>
+            <h3 className="text-2xl font-bold text-gray-800 mb-2 mt-0">Product Details</h3>
+            <div className='mb-2'>
+              <pre className='text-md font-bold'>Material : <span className='font-normal'>{product.details.Material}</span></pre>
+              <pre className='text-md font-bold'>Fit      : <span className='font-normal'>{product.details.Fit}</span></pre>
+              <pre className='text-md font-bold'>Neck     : <span className='font-normal'>{product.details.Neck}</span></pre>
+              <pre className='text-md font-bold'>Sleeve   : <span className='font-normal'>{product.details.Sleeve}</span></pre>
+              <pre className='text-md font-bold'>Care     : <span className='font-normal'>{product.details.Care}</span></pre>
+            </div>
 
             <h3 className="text-2xl font-bold text-gray-800 mb-4">Customer Reviews ({product.numReviews})</h3>
             {product.reviews.length > 0 ? (
@@ -218,7 +225,7 @@ const ProductDetailPage = ({ productId, onNavigate, onAddToCart, onProductClick 
       {recommendedProducts.length > 0 && (
         <section className="mt-16">
           <h2 className="text-3xl font-bold text-gray-800 text-center mb-10">You Might Also Like</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {recommendedProducts.map((product) => (
               <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
             ))}
@@ -228,5 +235,23 @@ const ProductDetailPage = ({ productId, onNavigate, onAddToCart, onProductClick 
     </div>
   );
 };
+
+// Simple ChevronDown icon for select elements
+const ChevronDown = ({ size = 24, className = '' }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={`lucide lucide-chevron-down ${className}`}
+  >
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+);
 
 export default ProductDetailPage;

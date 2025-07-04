@@ -36,9 +36,24 @@ const CartPage = ({ cart, onNavigate, onUpdateQuantity, onRemoveFromCart }) => {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-gray-800">{item.name}</h3>
                   <p className="text-sm text-gray-600">Size: {item.selectedSize} | Color: {item.selectedColor}</p>
-                  <p className="text-md font-bold text-indigo-700">${item.price.toFixed(2)}</p>
+                  <p className="text-md font-bold text-indigo-700 mb-2">${item.price.toFixed(2)}</p>
+                  <div className="flex items-center space-x-2 mr-4 product-quantity-lg">
+                    <button
+                      onClick={() => onUpdateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity - 1)}
+                      className="bg-gray-200 text-gray-700 p-2 rounded-full hover:bg-gray-300 transition-colors"
+                    >
+                      <Minus size={16} />
+                    </button>
+                    <span className="text-lg font-medium">{item.quantity}</span>
+                    <button
+                      onClick={() => onUpdateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity + 1)}
+                      className="bg-gray-200 text-gray-700 p-2 rounded-full hover:bg-gray-300 transition-colors"
+                    >
+                      <Plus size={16} />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 mr-4">
+                {/* <div className="flex items-center space-x-2 mr-4 product-quantity-lg">
                   <button
                     onClick={() => onUpdateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity - 1)}
                     className="bg-gray-200 text-gray-700 p-2 rounded-full hover:bg-gray-300 transition-colors"
@@ -52,7 +67,7 @@ const CartPage = ({ cart, onNavigate, onUpdateQuantity, onRemoveFromCart }) => {
                   >
                     <Plus size={16} />
                   </button>
-                </div>
+                </div> */}
                 <button
                   onClick={() => onRemoveFromCart(item.id, item.selectedSize, item.selectedColor)}
                   className="text-red-500 hover:text-red-700 transition-colors"

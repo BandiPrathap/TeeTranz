@@ -3,12 +3,14 @@ import { ShoppingCart, Menu, X, Shirt, Search, User, ChevronLeft, ChevronRight, 
 import allProducts from '../Data/Products';
 import categories from '../Data/Categories';
 import ProductCard from '../components/Products/ProductCard';
+import hero1 from '../images/hero4.png';
+import b3 from '../images/banners/b1.jpg';
 
 const HomePage = ({ onNavigate, onProductClick }) => {
   const heroImages = [
     { src: 'https://mir-s3-cdn-cf.behance.net/project_modules/fs/7986e1157917085.6381d9a6482a4.jpg', alt: 'Summer Collection' },
     { src: 'https://mir-s3-cdn-cf.behance.net/project_modules/1400/26c0ad196878507.662771f84bb4d.jpg', alt: 'Graphic Tees' },
-    { src: 'https://i.pinimg.com/originals/d4/a8/fa/d4a8faa6147ef48adf272d83e2eb279e.jpg', alt: 'Comfort Tees' },
+    { src: b3, alt: 'Comfort Tees' },
   ];
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
@@ -83,7 +85,7 @@ const HomePage = ({ onNavigate, onProductClick }) => {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
             ))}

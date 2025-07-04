@@ -1,3 +1,15 @@
+import f1 from '../images/products/f1.jpg';
+import f2 from '../images/products/f2.jpg';
+import f3 from '../images/products/f3.jpg';
+import f4 from '../images/products/f4.jpg';
+import f5 from '../images/products/f5.jpg';
+import f6 from '../images/products/f6.jpg';
+import n1 from '../images/products/n1.jpg';
+import n2 from '../images/products/n2.jpg';
+import n3 from '../images/products/n3.jpg';
+import n4 from '../images/products/n4.jpg';
+import n5 from '../images/products/n5.jpg';
+
 const allProducts = [
   {
     id: 'tshirt-001',
@@ -6,9 +18,9 @@ const allProducts = [
     gender: 'men',
     price: 24.99,
     images: [
-      'https://tse2.mm.bing.net/th/id/OIP.H0PCHDo01LEXvtdt9B1q7gHaHa?pid=Api&P=0&h=180',
-      'https://tse2.mm.bing.net/th/id/OIP.4J3_oprcN7J348Nf2GN7HQHaHa?pid=Api&P=0&h=180',
-      'https://tse2.mm.bing.net/th/id/OIP.zhuun4FXAZJdHzeQlOOQGwHaE7?pid=Api&P=0&h=180'
+      f1,
+      f2,
+      f3
     ],
     description: 'Embrace the retro vibes with our Vintage Sunset Tee. Made from 100% premium combed cotton, featuring a unique distressed graphic print that captures the essence of classic Americana. Perfect for a relaxed, everyday look.',
     details: 'Material: 100% Cotton | Fit: Regular | Neck: Crew Neck | Sleeve: Short Sleeve | Care: Machine Wash Cold',
@@ -28,8 +40,8 @@ const allProducts = [
     gender: 'women',
     price: 22.50,
     images: [
-      'https://placehold.co/600x600/FFF0F5/000?text=Minimal+Wave+Front',
-      'https://placehold.co/600x600/FFF0F5/000?text=Minimal+Wave+Back',
+      f4,
+      f5,
     ],
     description: 'A serene and stylish tee featuring a minimalist wave design. Crafted for comfort and elegance, this t-shirt is a versatile addition to any wardrobe. Its soft fabric ensures all-day comfort.',
     details: 'Material: Cotton Blend | Fit: Relaxed | Neck: Round Neck | Sleeve: Short Sleeve | Care: Machine Wash',
@@ -48,8 +60,8 @@ const allProducts = [
     gender: 'unisex',
     price: 26.75,
     images: [
-      'https://placehold.co/600x600/F0FFF0/000?text=Adventure+Awaits+Front',
-      'https://placehold.co/600x600/F0FFF0/000?text=Adventure+Awaits+Back',
+      f6,
+      n1,
     ],
     description: 'Inspire your next journey with the Adventure Awaits Tee. Durable and comfortable, perfect for outdoor enthusiasts. The unique graphic is printed using eco-friendly inks.',
     details: 'Material: Organic Cotton | Fit: Regular | Neck: Crew Neck | Sleeve: Short Sleeve | Care: Machine Wash',
@@ -66,8 +78,8 @@ const allProducts = [
     gender: 'men',
     price: 18.00,
     images: [
-      'https://placehold.co/600x600/FFFFFF/000?text=Plain+White+Front',
-      'https://placehold.co/600x600/FFFFFF/000?text=Plain+White+Side',
+      n2,
+      n3
     ],
     description: 'The essential wardrobe staple. Our Classic Plain White Tee is made from ultra-soft, breathable cotton for ultimate comfort and versatility. Perfect for layering or wearing on its own.',
     details: 'Material: 100% Cotton | Fit: Classic | Neck: Crew Neck | Sleeve: Short Sleeve | Care: Machine Wash',
@@ -88,8 +100,8 @@ const allProducts = [
     gender: 'kids',
     price: 15.00,
     images: [
-      'https://placehold.co/600x600/F0F8FF/000?text=Dino+Roar+Front',
-      'https://placehold.co/600x600/F0F8FF/000?text=Dino+Roar+Back',
+      n4,
+      n5
     ],
     description: 'A fun and vibrant t-shirt for your little dinosaur enthusiast! Made with soft, durable fabric to withstand all their adventures.',
     details: 'Material: Cotton Blend | Fit: Kids Regular | Neck: Crew Neck | Sleeve: Short Sleeve | Care: Machine Wash',

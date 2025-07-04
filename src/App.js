@@ -6,6 +6,7 @@ import ProductDetailPage from './Pages/ProductDetailPage';
 import CartPage from './Pages/CartPage';
 import CheckoutPage from './Pages/CheckoutPage';
 import MiniCartSnackbar from './components/MiniCartSnackbar';
+import Logo from './images/Logo.jpg';
 
 
 // --- Main App Component ---
@@ -103,8 +104,8 @@ const App = () => {
         <div className="container mx-auto flex justify-between items-center">
           {/* Logo */}
           <div className="text-3xl font-extrabold text-indigo-700 cursor-pointer" onClick={() => navigateTo('home')}>
-            <Shirt className="inline-block mr-2" size={32} />
-            TeeTrendz
+            <img src={Logo} height={70} width={70} className='rounded-full shadow object-cover'/>
+            
           </div>
 
           {/* Desktop Navigation */}
@@ -179,9 +180,9 @@ const App = () => {
         <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* About Us */}
           <div>
-            <h3 className="text-xl font-semibold text-white mb-4">About TeeTrendz</h3>
+            <h3 className="text-xl font-semibold text-white mb-4">About Arklin</h3>
             <p className="text-sm leading-relaxed">
-              At TeeTrendz, we believe your clothing should reflect your unique personality.
+              At Arklin, we believe your clothing should reflect your unique personality.
               We offer high-quality, stylish t-shirts for every trendsetter.
             </p>
           </div>

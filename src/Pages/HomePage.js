@@ -63,7 +63,7 @@ const HomePage = ({ onNavigate, onProductClick }) => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-gray-50">
+                    {/* <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Shop by Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -79,7 +79,7 @@ const HomePage = ({ onNavigate, onProductClick }) => {
             ))}
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* Featured Products Section */}
       <section className="py-16 bg-white">

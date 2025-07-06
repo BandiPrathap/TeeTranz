@@ -6,6 +6,8 @@ import RemoteLottie from '../components/RemoteLottie';
 import ProductCard from '../components/Products/ProductCard';
 import b3 from '../images/banners/b1.jpg';
 
+
+
 const HomePage = ({ onNavigate, onProductClick }) => {
   const heroImages = [
     { src: 'https://mir-s3-cdn-cf.behance.net/project_modules/fs/7986e1157917085.6381d9a6482a4.jpg', alt: 'Summer Collection' },
@@ -17,11 +19,11 @@ const HomePage = ({ onNavigate, onProductClick }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentHeroImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
-  const featuredProducts = allProducts.slice(0, 6); // Display first 6 as featured
+  const featuredProducts = allProducts.slice(0, 6);
 
   return (
     <main>
@@ -33,7 +35,7 @@ const HomePage = ({ onNavigate, onProductClick }) => {
             className={`absolute inset-0 duration-1000 ease-in-out ${index === currentHeroImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
             style={{ backgroundImage: `url(${image.src})`, backgroundSize: 'cover', backgroundPosition: 'center', objectFit: 'cover' }}
           >
-            <div className="absolute inset-0  flex items-center justify-center text-center p-4">
+            <div className="absolute inset-0 flex items-center justify-center text-center p-4">
               <div className="max-w-3xl text-white">
                 <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg leading-tight">
                   {image.alt.split(' - ')[0]}
@@ -77,14 +79,12 @@ const HomePage = ({ onNavigate, onProductClick }) => {
         </div>
       </section>
 
-
+      {/* Categories Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-            Shop by Category
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Shop by Category</h2>
 
-          {/* Desktop: All 3 in a row | Mobile: 2 in one row, last one full width */}
+          {/* Desktop */}
           <div className="hidden md:grid grid-cols-3 gap-6">
             {categories.map((cat) => (
               <div
@@ -104,9 +104,8 @@ const HomePage = ({ onNavigate, onProductClick }) => {
             ))}
           </div>
 
-          {/* Mobile Layout */}
+          {/* Mobile */}
           <div className="md:hidden space-y-6">
-            {/* First row: two categories side by side */}
             <div className="grid grid-cols-2 gap-6">
               {categories.slice(0, 2).map((cat) => (
                 <div
@@ -125,8 +124,6 @@ const HomePage = ({ onNavigate, onProductClick }) => {
                 </div>
               ))}
             </div>
-
-            {/* Second row: last category full width */}
             {categories[2] && (
               <div
                 key={categories[2].id}
@@ -147,32 +144,31 @@ const HomePage = ({ onNavigate, onProductClick }) => {
         </div>
       </section>
 
-
-        {/* Featured Products Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-6 md:px-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {featuredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
-              ))}
-            </div>
-            <div className="text-center mt-12">
-              <button
-                onClick={() => onNavigate('shop')}
-                className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105"
-              >
-                View All Products
-              </button>
-            </div>
+      {/* Featured Products Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 md:px-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
+            ))}
           </div>
-        </section>
+          <div className="text-center mt-12">
+            <button
+              onClick={() => onNavigate('shop')}
+              className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105"
+            >
+              View All Products
+            </button>
+          </div>
+        </div>
+      </section>
 
       {/* Promotional Banner */}
       <section className="py-16 bg-gradient-to-r from-purple-600 to-indigo-700 text-white text-center">
         <div className="container mx-auto px-6 md:px-12">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4 animate-pulse">Limited Time Offer!</h2>
-          <p className="text-lg md:text-2xl mb-8">Get 20% off on all Graphic Tees. Use code: **GRAPHIC20**</p>
+          <p className="text-lg md:text-2xl mb-8">Get 20% off on all Graphic Tees. Use code: <strong>GRAPHIC20</strong></p>
           <button
             onClick={() => onNavigate('shop', { category: 'graphic' })}
             className="bg-white text-purple-700 px-10 py-5 rounded-full text-xl font-bold shadow-2xl hover:bg-purple-100 transition-all duration-300 transform hover:scale-110"

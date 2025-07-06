@@ -24,7 +24,7 @@ const ProductCard = ({ product, onProductClick }) => (
     </div>
     <div className="p-2 flex flex-col flex-grow">
       <h3 className="text-sm font-semibold text-gray-800 mb-1">{product.name}</h3>
-      {/* <p className="text-gray-500 text-sm mb-2 capitalize">{product.category} T-Shirt</p> */}
+      <p className="text-gray-500 text-sm mb-2 capitalize">{product.category} T-Shirt</p>
       <div className="flex items-center mb-2">
         <StarRating rating={product.rating} />
         {/* {product.numReviews > 0 && <span className="text-sm text-gray-600 ml-2">({product.numReviews})</span>} */}

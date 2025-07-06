@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ShoppingCart, Menu, X, Shirt, Search, User, ChevronLeft, ChevronRight, Star, Plus, Minus, CheckCircle, Truck, CreditCard, Package, Heart, Filter, MapPin, Phone, Mail } from 'lucide-react';
 import allProducts from '../Data/Products';
 import categories from '../Data/Categories';
+import RemoteLottie from '../components/RemoteLottie';
 import ProductCard from '../components/Products/ProductCard';
-import hero1 from '../images/hero4.png';
 import b3 from '../images/banners/b1.jpg';
 
 const HomePage = ({ onNavigate, onProductClick }) => {
@@ -62,44 +62,111 @@ const HomePage = ({ onNavigate, onProductClick }) => {
         </div>
       </section>
 
-      {/* Categories Section */}
+      {/* Floating Promo Strip Below Hero */}
+      <section className="relative z-20 bg-gradient-to-r from-pink-600 via-red-500 to-yellow-500 text-white py-3 px-4 shadow-lg">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4 animate-slide-in">
+          <p className="text-center text-sm md:text-base font-semibold">
+            🎉 Limited Time Offer: Get <span className="underline font-bold">20% OFF</span> on Graphic Tees — Use code <strong>GRAPHIC20</strong>
+          </p>
+          <button
+            onClick={() => onNavigate('shop', { category: 'graphic' })}
+            className="bg-white text-pink-700 px-4 py-2 rounded-full font-semibold text-sm shadow-md hover:bg-pink-100 transition-all duration-200"
+          >
+            Shop Now
+          </button>
+        </div>
+      </section>
+
+
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Shop by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+            Shop by Category
+          </h2>
+
+          {/* Desktop: All 3 in a row | Mobile: 2 in one row, last one full width */}
+          <div className="hidden md:grid grid-cols-3 gap-6">
             {categories.map((cat) => (
               <div
                 key={cat.id}
-                className="bg-white rounded-xl shadow-md p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-xl cursor-pointer flex flex-col items-center justify-center"
+                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
                 onClick={() => onNavigate('shop', { category: cat.id })}
               >
-                <Shirt size={48} className="text-indigo-600 mb-4" />
-                <h3 className="text-lg font-semibold text-gray-800">{cat.name}</h3>
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <h3 className="text-white text-xl font-semibold">{cat.name}</h3>
+                </div>
               </div>
             ))}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="md:hidden space-y-6">
+            {/* First row: two categories side by side */}
+            <div className="grid grid-cols-2 gap-6">
+              {categories.slice(0, 2).map((cat) => (
+                <div
+                  key={cat.id}
+                  className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 h-40"
+                  onClick={() => onNavigate('shop', { category: cat.id })}
+                >
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    className="w-full h-40 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <h3 className="text-white text-xl font-semibold">{cat.name}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Second row: last category full width */}
+            {categories[2] && (
+              <div
+                key={categories[2].id}
+                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 h-40"
+                onClick={() => onNavigate('shop', { category: categories[2].id })}
+              >
+                <img
+                  src={categories[2].image}
+                  alt={categories[2].name}
+                  className="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <h3 className="text-white text-xl font-semibold">{categories[2].name}</h3>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6 md:px-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
-            ))}
+
+        {/* Featured Products Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-6 md:px-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">Featured T-Shirts</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} onProductClick={onProductClick} />
+              ))}
+            </div>
+            <div className="text-center mt-12">
+              <button
+                onClick={() => onNavigate('shop')}
+                className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105"
+              >
+                View All Products
+              </button>
+            </div>
           </div>
-          <div className="text-center mt-12">
-            <button
-              onClick={() => onNavigate('shop')}
-              className="bg-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:bg-indigo-700 transition-colors duration-300 transform hover:scale-105"
-            >
-              View All Products
-            </button>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* Promotional Banner */}
       <section className="py-16 bg-gradient-to-r from-purple-600 to-indigo-700 text-white text-center">
